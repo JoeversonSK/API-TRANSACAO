@@ -51,4 +51,9 @@ class TransacaoService {
         return $transacao;
     }
 
+    public function limparTodasTransacoes() {
+        return $this->transacaoModel->limparTodas();
+    }
+    
+
 }
