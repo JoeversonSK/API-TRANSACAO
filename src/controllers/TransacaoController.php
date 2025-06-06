@@ -53,5 +53,15 @@ class TransacaoController {
         }
     }
     
+    public function limparTodas(Request $request, Response $response) {
+        try {
+            $this->transacaoService->limparTodasTransacoes();
+            return $response->withStatus(200);
+            
+        } catch (Exception $e) {
+            error_log("Erro ao limpar transações: " . $e->getMessage());
+            return $response->withStatus(500);
+        }
+    }
 
 }
