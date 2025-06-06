@@ -33,5 +33,25 @@ class TransacaoController {
             return $response->withStatus(400);
         }
     }
-   
+    
+    public function buscarPorId(Request $request, Response $response, array $args) {
+        try {
+            $id = $args['id'] ?? '';
+            
+            $transacao = $this->transacaoService->buscarTransacao($id);
+            
+            if ($transacao === null) {
+                return $response->withStatus(404);
+            }
+            
+            $response->getBody()->write(json_encode($transacao));
+            return $response->withStatus(200);
+            
+        } catch (Exception $e) {
+            error_log("Erro ao buscar transação: " . $e->getMessage());
+            return $response->withStatus(500);
+        }
+    }
+    
+
 }
