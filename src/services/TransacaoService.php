@@ -36,5 +36,19 @@ class TransacaoService {
         return true;
     }
     
+    public function buscarTransacao($id) {
+        if (empty($id)) {
+            return null;
+        }
+        
+        $transacao = $this->transacaoModel->buscarPorId($id);
+        
+        if ($transacao) {
+
+            $transacao['dataHora'] = TransacaoValidator::formatarDataHoraResposta($transacao['dataHora']);
+        }
+        
+        return $transacao;
+    }
 
 }
