@@ -63,5 +63,22 @@ class TransacaoController {
             return $response->withStatus(500);
         }
     }
-
+    
+    public function limparPorId(Request $request, Response $response, array $args) {
+        try {
+            $id = $args['id'] ?? '';
+            
+            $removido = $this->transacaoService->limparTransacao($id);
+            
+            if (!$removido) {
+                return $response->withStatus(404);
+            }
+            
+            return $response->withStatus(200);
+            
+        } catch (Exception $e) {
+            error_log("Erro ao limpar transação: " . $e->getMessage());
+            return $response->withStatus(500);
+        }
+    }
 }
