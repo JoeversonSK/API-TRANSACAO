@@ -55,5 +55,12 @@ class TransacaoService {
         return $this->transacaoModel->limparTodas();
     }
     
+    public function limparTransacao($id) {
+        if (empty($id)) {
+            return false;
+        }
+        
+        return $this->transacaoModel->limparPorId($id);
+    }
 
 }
